@@ -1,7 +1,7 @@
 // const { program } = require("commander");
 const fs = require("fs").promises;
 
-const contacts = require("./contacts");
+const contacts = require("./contacts/contacts");
 
 const { Command } = require("commander");
 const program = new Command();
@@ -59,7 +59,7 @@ const options = program.opts();
 
 invokeActon(options)
   .then((data) => console.log(data))
-  .catch((error) => console(error));
+  .catch((error) => console.log(error));
 
 // invokeActon({ action: "list" });
 

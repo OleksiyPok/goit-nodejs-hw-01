@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const crypto = require("node:crypto");
 
-const { CONTACTS_FILE_PATH } = require("./filePaths");
+const { CONTACTS_FILE_PATH } = require("../filePaths");
 
 async function read() {
   const data = await fs.readFile(CONTACTS_FILE_PATH, "utf-8");
