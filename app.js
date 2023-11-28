@@ -1,11 +1,9 @@
+const { Command } = require("commander");
 const fs = require("fs").promises;
 
 const contacts = require("./contacts/contacts");
 
-const { Command } = require("commander");
-const program = new Command();
-
-const invokeActon = async ({ action, id, data }) => {
+const invokeActon = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
       const contactsList = await contacts.getAllContacts();
@@ -16,11 +14,15 @@ const invokeActon = async ({ action, id, data }) => {
       return contact;
 
     case "add":
-      const addedContact = await contacts.addContact(data);
+      const addedContact = await contacts.addContact({ name, email, phone });
       return addedContact;
 
     case "update":
-      const updatedContact = await contacts.updateContactById(id, data);
+      const updatedContact = await contacts.updateContactById(id, {
+        name,
+        email,
+        phone,
+      });
       return updatedContact;
 
     case "remove":
@@ -32,6 +34,8 @@ const invokeActon = async ({ action, id, data }) => {
   }
 };
 
+const program = new Command();
+
 program
   .option("-a, --action <action>", "Choose action")
   .option("-i, --id <id>", "user id")
@@ -41,6 +45,8 @@ program
 
 program.parse(process.argv);
 const options = program.opts();
+
+console.log("options:", options);
 
 invokeActon(options)
   .then((data) => console.log(data))
