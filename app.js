@@ -46,8 +46,6 @@ program
 program.parse(process.argv);
 const options = program.opts();
 
-console.log("options:", options);
-
 invokeActon(options)
   .then((data) => console.log(data))
   .catch((error) => console.log(error));
